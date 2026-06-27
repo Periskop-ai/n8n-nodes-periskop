@@ -1,0 +1,64 @@
+{
+  "name": "n8n-nodes-periskop",
+  "version": "0.1.4",
+  "description": "n8n community node for Periskop — product discovery for AI agents and workflows.",
+  "keywords": [
+    "n8n-community-node-package",
+    "periskop",
+    "product-discovery",
+    "shopping",
+    "shopping-discovery",
+    "ai-agents",
+    "workflow-automation"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/Periskop-ai/n8n-nodes-periskop#readme",
+  "author": {
+    "name": "Periskop",
+    "url": "https://periskop.ai",
+    "email": "info@periskop.ai"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Periskop-ai/n8n-nodes-periskop.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Periskop-ai/n8n-nodes-periskop/issues"
+  },
+  "engines": {
+    "node": ">=18.10"
+  },
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc && gulp build:icons",
+    "dev": "tsc --watch",
+    "format": "prettier nodes credentials --write",
+    "lint": "eslint nodes credentials",
+    "lintfix": "eslint nodes credentials --fix",
+    "prepublishOnly": "npm run build && npm run lint -- --quiet"
+  },
+  "files": [
+    "dist"
+  ],
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "credentials": [
+      "dist/credentials/PeriskopApi.credentials.js"
+    ],
+    "nodes": [
+      "dist/nodes/Periskop/Periskop.node.js"
+    ]
+  },
+  "devDependencies": {
+    "@typescript-eslint/parser": "^7.18.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-n8n-nodes-base": "^1.16.3",
+    "gulp": "^5.0.0",
+    "n8n-workflow": "*",
+    "prettier": "^3.3.3",
+    "typescript": "^5.5.4"
+  },
+  "peerDependencies": {
+    "n8n-workflow": "*"
+  }
+}

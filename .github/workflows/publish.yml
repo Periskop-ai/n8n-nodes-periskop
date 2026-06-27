@@ -1,0 +1,40 @@
+# Publishes n8n-nodes-periskop to npm with build provenance (Sigstore).
+#
+# Provenance is REQUIRED for n8n verified-node / Creator Portal submission.
+# Trigger: publishing a GitHub Release (tag like v0.1.0).
+#
+# One-time setup before this works:
+#   1. Repo must live at github.com/Periskop-ai/n8n-nodes-periskop (matches package.json).
+#   2. Add repo secret NPM_TOKEN = an npm automation token with publish rights
+#      (npm → Access Tokens → Generate → "Automation").
+#   3. Ensure the npm package version in package.json matches the release tag.
+name: Publish to npm
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+  id-token: write # required for npm provenance (OIDC)
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          registry-url: 'https://registry.npmjs.org'
+
+      - run: npm ci
+
+      - run: npm run build
+
+      - run: npm run lint
+
+      - run: npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
