@@ -2,7 +2,7 @@
 	"node": "n8n-nodes-periskop.periskop",
 	"nodeVersion": "1.0",
 	"codexVersion": "1.0",
-	"categories": ["AI", "Marketing", "Miscellaneous"],
+	"categories": ["Marketing & Content", "Miscellaneous"],
 	"resources": {
 		"credentialDocumentation": [
 			{
